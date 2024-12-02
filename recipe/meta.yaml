@@ -6,22 +6,22 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/wield.declarative-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/wield.declarative-{{ version }}.tar.gz
   sha256: f6e81ca0a61c890dd2304677923051b49d577c74e7ee9e73f8a9a78509eda611
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - setuptools >=45
     - wheel
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - numpy
 
 test:
@@ -31,6 +31,7 @@ test:
     - pip check
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/wieldphysics/wield-declarative
